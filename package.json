@@ -1,0 +1,26 @@
+{
+  "name": "@deneb-kaitos/goods-and-services",
+  "version": "0.0.0",
+  "description": "goods & services",
+  "type": "module",
+  "packageManager": "pnpm@8.14.0",
+  "engines": {
+    "node": "21.5.0",
+    "pnpm": "8.14.0"
+  },
+  "engineStrict": true,
+  "scripts": {
+    "preinstall": "npx only-allow pnpm"
+  },
+  "keywords": [],
+  "author": "Dmitry N. Medvedev <dmitry.medvedev@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deneb-kaitos/goods-and-services.git"
+  },
+  "bugs": {
+    "url": "https://github.com/deneb-kaitos/goods-and-services/issues"
+  },
+  "homepage": "https://github.com/deneb-kaitos/goods-and-services#readme"
+}
