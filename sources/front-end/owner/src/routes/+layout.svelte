@@ -17,6 +17,8 @@
     ;
     gap: 1rem;
   
+
+    height: 100svh;
     min-height: 100svh;
     max-height: 100svh;
   }
@@ -30,6 +32,7 @@
 
   main {
     grid-area: main;
+    display: flex;
     overflow: hidden;
   }
 
