@@ -1,11 +1,11 @@
 {
   "$schema": "https://json.schemastore.org/web-manifest-combined.json",
-  "name": "binning",
-  "short_name": "binning",
+  "name": "goods & services",
+  "short_name": "g&s",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#fff",
-  "description": "binning",
+  "description": "buy & sell for small teams",
   "icons": [
     {
       "src": "/favicon.png",
