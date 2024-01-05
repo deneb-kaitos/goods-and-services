@@ -2,6 +2,9 @@
   import {
     SuppliersStore,
   } from '$lib/stores/Suppliers.svelte.js';
+  import {
+    GoodsStore,
+  } from '$lib/stores/Goods.svelte.js';
 </script>
 
 <style>
@@ -36,6 +39,7 @@
     gap: 0.5rem;
     padding: 0.5rem;
     background-color: var(--theme-black);
+    border: 1px solid black;
   }
 
   .supplier-info :is(legend) {
@@ -129,6 +133,10 @@
     justify-content: center;
     align-items: center;
   }
+
+  .products > .product {
+    display: grid;
+  }
 </style>
 
 <article>
@@ -166,6 +174,10 @@
   {/each}
   </div>
   <div class="products">
-    products
+    {#each GoodsStore.state.values() as product(product.id)}
+      <div id={product.id} class="product">
+        <div class="product-name">{product.name}</div>
+      </div>
+    {/each}
   </div>
 </article>
