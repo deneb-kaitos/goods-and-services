@@ -1,4 +1,4 @@
-class SupplierGoods {
+class SupplierProducts {
   productsBySupplier = $state(new Map());
   suppliersByProduct = $state(new Map());
 
@@ -32,4 +32,4 @@ class SupplierGoods {
   }
 }
 
-export const SupplierGoodsStore = new SupplierGoods();
+export const SupplierProductsStore = new SupplierProducts();

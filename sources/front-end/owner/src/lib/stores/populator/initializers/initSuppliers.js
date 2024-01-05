@@ -1,34 +1,71 @@
+import {
+  validatePassedObject,
+} from '../helpers/validatePassedObject.js';
+import {
+  Cities,
+} from '../constants/cities.js';
+import {
+  FirstNames,
+} from '../constants/firstNames.js';
+import {
+  LastNames,
+} from '../constants/lastNames.js';
+import {
+  StreetNames,
+} from '../constants/streets.js';
+import {
+  ZipCodes,
+} from '../constants/zipCodes.js';
+import {
+  getSingleRandomValue,
+} from '../helpers/getSingleRandomValue.js';
+import {
+  generateBuildingNumber,
+} from '../helpers/generateBuildingNumber.js';
+import {
+  generatePhoneNumber,
+} from '../helpers/generatePhoneNumber.js';
+import {
+  normalizeEmailAddress,
+} from '../helpers/normalizeEmailAddress.js';
+
 /**
  * 
  * @param {SuppliersStore} store 
  */
 export const initSuppliers = async (store = null) => {
-  if (store === null) {
-    throw new ReferenceError('store is undefined');
-  }
+  validatePassedObject(store);
 
   const result = [];
   const suppliersMap = new Map();
 
-  for (let i = 0; i < 3; i += 1) {
+  for (let i = 0; i < 10; i += 1) {
+    const country = 'Deutschland';
+    const city = getSingleRandomValue(Cities);
+    const street = getSingleRandomValue(StreetNames);
+    const building = generateBuildingNumber();
+    const zip = getSingleRandomValue(ZipCodes);
+    const firstName = getSingleRandomValue(FirstNames);
+    const lastName = getSingleRandomValue(LastNames);
+    const companyName = `${firstName} ${lastName} GmbH`;
     const supplierInfo = {
       id: crypto.randomUUID(),
       creationDate: Date.now(),
       companyInfo: {
-        name: `Number #${i} GmbH`,
+        name: companyName,
         address: {
-          country: 'Germany',
-          city: 'Berlin',
-          street: 'Examplestr.',
-          building: '155',
-          zip: '12720',
+          country,
+          city,
+          street,
+          building,
+          zip,
         },
       },
       PoC: {
-        firstName: 'Günter',
-        lastName: 'Federlechner',
-        email: `${i}@example.com`,
-        phone: '+491111111111',
+        firstName,
+        lastName,
+        email: normalizeEmailAddress(`${firstName}.${lastName}@example.com`),
+        phone: generatePhoneNumber(' '),
       },
     };
 
