@@ -3,8 +3,8 @@
     SuppliersStore,
   } from '$lib/stores/Suppliers.svelte.js';
   import {
-    GoodsStore,
-  } from '$lib/stores/Goods.svelte.js';
+    ProductsStore,
+  } from '$lib/stores/Products.svelte.js';
 </script>
 
 <style>
@@ -75,7 +75,6 @@
 
   .company-name {
     grid-area: company-name;
-    display: flex;
     
     background-color: var(--theme-green);
     color: var(--theme-dark_gray);
@@ -98,6 +97,10 @@
 
   .company-address :is(span:not(:first-of-type)) {
     padding-left: 0.5rem;
+  }
+
+  .company-address :is(.company-country, .company-city, .company-building)::after {
+    content: ", ";
   }
 
   .poc :is(.poc-name, .poc-email-phone) {
@@ -174,7 +177,7 @@
   {/each}
   </div>
   <div class="products">
-    {#each GoodsStore.state.values() as product(product.id)}
+    {#each ProductsStore.state.values() as product(product.id)}
       <div id={product.id} class="product">
         <div class="product-name">{product.name}</div>
       </div>

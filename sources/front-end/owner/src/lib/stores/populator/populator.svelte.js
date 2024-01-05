@@ -2,17 +2,17 @@ import {
   SuppliersStore,
 } from '$lib/stores/Suppliers.svelte.js';
 import {
-  GoodsStore,
-} from '$lib/stores/Goods.svelte.js';
+  ProductsStore,
+} from '$lib/stores/Products.svelte.js';
 import {
-  SupplierGoodsStore,
-} from '$lib/stores/SupplierGoods.svelte.js';
+  SupplierProductsStore,
+} from '$lib/stores/SupplierProducts.svelte.js';
 import {
   initSuppliers,
 } from './initializers/initSuppliers.js';
 import {
-  initGoods,
-} from './initializers/initGoods.js';
+  initProducts,
+} from './initializers/initProducts.js';
 import {
   initSupplierProducts,
 } from './initializers/initSupplierProducts.js';
@@ -20,6 +20,6 @@ import {
 
 export const initData = async () => {
   const supplierIds = await initSuppliers(SuppliersStore);
-  const goodsIds = await initGoods(GoodsStore);
-  await initSupplierProducts(supplierIds, goodsIds, SupplierGoodsStore);
+  const goodsIds = await initProducts(ProductsStore);
+  await initSupplierProducts(supplierIds, goodsIds, SupplierProductsStore);
 };
