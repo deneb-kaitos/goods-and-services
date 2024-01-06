@@ -9,6 +9,8 @@ import {
   PUBLIC_WEB_DEBUG_PORT,
 } from '$env/static/public';
 
+console.log({ PUBLIC_WEB_HOST });
+
 const quotableStatements = Object.freeze(['none', 'self', 'unsafe-inline']);
 
 const quote = (statement) => {

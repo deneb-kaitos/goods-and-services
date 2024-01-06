@@ -20,6 +20,6 @@ import {
 
 export const initData = async () => {
   const supplierIds = await initSuppliers(SuppliersStore);
-  const goodsIds = await initProducts(ProductsStore);
-  await initSupplierProducts(supplierIds, goodsIds, SupplierProductsStore);
+  const productsIds = await initProducts(ProductsStore);
+  await initSupplierProducts(supplierIds, productsIds, SupplierProductsStore);
 };
