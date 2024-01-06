@@ -3,8 +3,26 @@
     SuppliersStore,
   } from '$lib/stores/Suppliers.svelte.js';
   import {
-    ProductsStore,
-  } from '$lib/stores/Products.svelte.js';
+    FilteredProductsStore,
+  } from '$lib/stores/FilteredProducts.svelte.js';
+
+  /**
+   * 
+   * @param e {PointerEvent}
+   */
+  const showProductsBySupplier = (e) => {
+    const {
+      /**
+       * @type {string}
+      */
+      supplierId,
+    } = e?.target?.dataset;
+
+    console.log('showProductsBySupplier', supplierId);
+    FilteredProductsStore.filter({
+      supplierId,
+    }); 
+  }
 </script>
 
 <style>
@@ -22,10 +40,12 @@
   .suppliers,
   .products {
     display: grid;
-    grid-template-columns: 1fr;
-    grid-auto-flow: row;
     gap: 1rem; 
     overflow-y: auto;
+    grid-auto-flow: row;
+    grid-template-columns: 1fr;
+  
+    border-radius: var(--border-radius);
   }
 
   .supplier-info {
@@ -137,8 +157,72 @@
     align-items: center;
   }
 
-  .products > .product {
+  .products {
+    grid-template-rows: 4rem 1fr;
+    grid-template-areas:
+      'products-filters'
+      'product-list'
+    ;
+  }
+
+  .products > .products-filters {
+    grid-area: products-filters;
     display: grid;
+    grid-auto-flow: column;
+    justify-content: start;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+
+    border-radius: var(--border-radius);
+
+    background-color: var(--theme-black);    
+    border: 1px solid black;
+  }
+
+  .products > .product-list {
+    grid-area: product-list;
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+  }
+
+  .product {
+    display: grid;
+    grid-template-rows: 1fr 3rem 3rem;
+    grid-template-areas:
+      'product-name'
+      'product-categories'
+      'manufacturer'
+    ;
+    gap: 0.5rem;
+    background-color: var(--theme-black);
+    border: 1px solid black;
+    border-radius: var(--border-radius);
+    padding: 0.5rem 1rem;
+  }
+
+  .product > .product-name {
+    grid-area: product-name;
+    font-size: 2rem;
+  }
+
+  .product > .product-categories {
+    grid-area: product-categories;
+    font-size: 1rem;
+  }
+
+  .product > .product-manufacturer {
+    grid-area: manufacturer;
+    font-size: 1rem;
+  }
+
+  .product :is(.product-name, .product-categories, .product-manufacturer) {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 1rem;
   }
 </style>
 
@@ -171,16 +255,31 @@
       </fieldset>
       <fieldset class="controls">
         <legend>actions</legend>
-        <button name="products">products</button>
+        <button name="products" onclick="{showProductsBySupplier}" data-supplier-id={supplierInfo.id}>products</button>
       </fieldset>
     </div> 
   {/each}
   </div>
   <div class="products">
-    {#each ProductsStore.state.values() as product(product.id)}
+    <div class="products-filters">
+      <button>
+        Herbs and Spices
+      </button>
+      <button>
+        Vegetables
+      </button>
+    </div>
+    <div class="product-list">
+    {#each FilteredProductsStore.state.values() as product(product.id)}
       <div id={product.id} class="product">
         <div class="product-name">{product.name}</div>
+        <div class="product-categories">
+          <div class="product-group">{product.groupName}</div>
+          <div class="product-subgroup">{product.subGroupName}</div>
+        </div>
+        <div class="product-manufacturer">{product.manufacturer.name}</div>
       </div>
     {/each}
+    </div>
   </div>
 </article>

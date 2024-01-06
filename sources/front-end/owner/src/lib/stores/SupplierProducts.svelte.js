@@ -1,6 +1,5 @@
 class SupplierProducts {
   productsBySupplier = $state(new Map());
-  suppliersByProduct = $state(new Map());
 
   constructor() {
     console.log(`${this.constructor.name}.ctor`);
