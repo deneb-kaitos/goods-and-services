@@ -224,6 +224,17 @@
     align-items: center;
     gap: 1rem;
   }
+
+  .empty-list-message {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 6rem;
+    color: var(--theme-black);
+  }
 </style>
 
 <article>
@@ -270,16 +281,22 @@
       </button>
     </div>
     <div class="product-list">
-    {#each FilteredProductsStore.state.values() as product(product.id)}
-      <div id={product.id} class="product">
-        <div class="product-name">{product.name}</div>
-        <div class="product-categories">
-          <div class="product-group">{product.groupName}</div>
-          <div class="product-subgroup">{product.subGroupName}</div>
-        </div>
-        <div class="product-manufacturer">{product.manufacturer.name}</div>
-      </div>
-    {/each}
+      {#if FilteredProductsStore.state.length === 0}
+          <div class="empty-list-message">
+            click the "products" button on the left
+          </div>
+        {:else}
+          {#each FilteredProductsStore.state.values() as product(product.id)}
+            <div id={product.id} class="product">
+              <div class="product-name">{product.name}</div>
+              <div class="product-categories">
+                <div class="product-group">{product.groupName}</div>
+                <div class="product-subgroup">{product.subGroupName}</div>
+              </div>
+              <div class="product-manufacturer">{product.manufacturer.name}</div>
+            </div>
+          {/each}
+      {/if}
     </div>
   </div>
 </article>
